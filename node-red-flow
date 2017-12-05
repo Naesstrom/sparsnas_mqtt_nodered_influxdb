@@ -1,12 +1,5 @@
 [
     {
-        "id": "c16aeff1.23cc7",
-        "type": "tab",
-        "label": "Sparsnäs",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "e873e2cb.6a9fa",
         "type": "mqtt in",
         "z": "c16aeff1.23cc7",
@@ -33,38 +26,6 @@
         "x": 876.0197715759277,
         "y": 470.0039701461792,
         "wires": []
-    },
-    {
-        "id": "325ee53e.6014ea",
-        "type": "mqtt out",
-        "z": "c16aeff1.23cc7",
-        "name": "",
-        "topic": "home/sparsnas",
-        "qos": "",
-        "retain": "false",
-        "broker": "b4900578.721178",
-        "x": 520.0195541381836,
-        "y": 710.0039350986481,
-        "wires": []
-    },
-    {
-        "id": "86685cd9.25177",
-        "type": "inject",
-        "z": "c16aeff1.23cc7",
-        "name": "sparsnas json",
-        "topic": "home/sparsnas",
-        "payload": "{\"Sequence\":35851,\"Watt\": 7372.8,\"kWh\":18889.219,\"battery\":100,\"FreqErr\":0.57}",
-        "payloadType": "json",
-        "repeat": "20",
-        "crontab": "",
-        "once": true,
-        "x": 289.01956939697266,
-        "y": 709.0039503574371,
-        "wires": [
-            [
-                "325ee53e.6014ea"
-            ]
-        ]
     },
     {
         "id": "8c2ca86b.f5c188",
