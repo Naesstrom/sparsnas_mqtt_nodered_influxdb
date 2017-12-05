@@ -1,0 +1,337 @@
+[
+    {
+        "id": "c16aeff1.23cc7",
+        "type": "tab",
+        "label": "Sparsnäs",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "e873e2cb.6a9fa",
+        "type": "mqtt in",
+        "z": "c16aeff1.23cc7",
+        "name": "",
+        "topic": "home/sparsnas/#",
+        "qos": "2",
+        "broker": "b4900578.721178",
+        "x": 311.0195503234863,
+        "y": 808.0039620399475,
+        "wires": [
+            [
+                "8c2ca86b.f5c188"
+            ]
+        ]
+    },
+    {
+        "id": "bc81be2c.8ff13",
+        "type": "debug",
+        "z": "c16aeff1.23cc7",
+        "name": "after json",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 876.0197715759277,
+        "y": 470.0039701461792,
+        "wires": []
+    },
+    {
+        "id": "325ee53e.6014ea",
+        "type": "mqtt out",
+        "z": "c16aeff1.23cc7",
+        "name": "",
+        "topic": "home/sparsnas",
+        "qos": "",
+        "retain": "false",
+        "broker": "b4900578.721178",
+        "x": 520.0195541381836,
+        "y": 710.0039350986481,
+        "wires": []
+    },
+    {
+        "id": "86685cd9.25177",
+        "type": "inject",
+        "z": "c16aeff1.23cc7",
+        "name": "sparsnas json",
+        "topic": "home/sparsnas",
+        "payload": "{\"Sequence\":35851,\"Watt\": 7372.8,\"kWh\":18889.219,\"battery\":100,\"FreqErr\":0.57}",
+        "payloadType": "json",
+        "repeat": "20",
+        "crontab": "",
+        "once": true,
+        "x": 289.01956939697266,
+        "y": 709.0039503574371,
+        "wires": [
+            [
+                "325ee53e.6014ea"
+            ]
+        ]
+    },
+    {
+        "id": "8c2ca86b.f5c188",
+        "type": "json",
+        "z": "c16aeff1.23cc7",
+        "name": "",
+        "pretty": false,
+        "x": 530.0196228027344,
+        "y": 806.0039248466492,
+        "wires": [
+            [
+                "bc81be2c.8ff13",
+                "69cc4b3f.6b3134",
+                "306a7fa8.a187c",
+                "9ef64097.a6633",
+                "84fabe6.7971e4"
+            ]
+        ]
+    },
+    {
+        "id": "eda662ed.32ae8",
+        "type": "debug",
+        "z": "c16aeff1.23cc7",
+        "name": "Final_watt",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1152.8948249816895,
+        "y": 604.6447057723999,
+        "wires": []
+    },
+    {
+        "id": "69cc4b3f.6b3134",
+        "type": "function",
+        "z": "c16aeff1.23cc7",
+        "name": "Watt",
+        "func": "msg.url =\"http://192.168.1.15:8086/write?db=sparsnas\";\nmsg.payload = \"sparsnas\" + \",measurement=Watt \" + \" value=\" + msg.payload.Watt;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 879.0197105407715,
+        "y": 587.0039863586426,
+        "wires": [
+            [
+                "eda662ed.32ae8",
+                "27bed04.fd5073"
+            ]
+        ]
+    },
+    {
+        "id": "ada162ca.d158f",
+        "type": "debug",
+        "z": "c16aeff1.23cc7",
+        "name": "reply_Watt",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1380.3830184936523,
+        "y": 522.6445913314819,
+        "wires": []
+    },
+    {
+        "id": "27bed04.fd5073",
+        "type": "http request",
+        "z": "c16aeff1.23cc7",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "",
+        "tls": "",
+        "x": 1167.5197372436523,
+        "y": 523.0039339065552,
+        "wires": [
+            [
+                "ada162ca.d158f"
+            ]
+        ]
+    },
+    {
+        "id": "306a7fa8.a187c",
+        "type": "function",
+        "z": "c16aeff1.23cc7",
+        "name": "kWh",
+        "func": "msg.url =\"http://192.168.1.15:8086/write?db=sparsnas\";\nmsg.payload = \"sparsnas\" + \",measurement=kWh \" + \" value=\" + msg.payload.kWh;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 876.0195426940918,
+        "y": 730.0040111541748,
+        "wires": [
+            [
+                "8170beab.e416e",
+                "38e72e2f.06bc52"
+            ]
+        ]
+    },
+    {
+        "id": "8170beab.e416e",
+        "type": "debug",
+        "z": "c16aeff1.23cc7",
+        "name": "Final_kWh",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1146.8946418762207,
+        "y": 773.6446704864502,
+        "wires": []
+    },
+    {
+        "id": "38e72e2f.06bc52",
+        "type": "http request",
+        "z": "c16aeff1.23cc7",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "",
+        "tls": "",
+        "x": 1161.5195541381836,
+        "y": 692.0038986206055,
+        "wires": [
+            [
+                "a01d0e51.e482f"
+            ]
+        ]
+    },
+    {
+        "id": "a01d0e51.e482f",
+        "type": "debug",
+        "z": "c16aeff1.23cc7",
+        "name": "reply_kWh",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1374.3828353881836,
+        "y": 691.6445560455322,
+        "wires": []
+    },
+    {
+        "id": "9ef64097.a6633",
+        "type": "function",
+        "z": "c16aeff1.23cc7",
+        "name": "battery",
+        "func": "msg.url =\"http://192.168.1.15:8086/write?db=sparsnas\";\nmsg.payload = \"sparsnas\" + \",measurement=battery \" + \" value=\" + msg.payload.battery;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 882.0195465087891,
+        "y": 851.0039672851562,
+        "wires": [
+            [
+                "b92d478b.578e58",
+                "22b153ed.dca85c"
+            ]
+        ]
+    },
+    {
+        "id": "b92d478b.578e58",
+        "type": "debug",
+        "z": "c16aeff1.23cc7",
+        "name": "Final_battery",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1140.8946418762207,
+        "y": 924.6446704864502,
+        "wires": []
+    },
+    {
+        "id": "22b153ed.dca85c",
+        "type": "http request",
+        "z": "c16aeff1.23cc7",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "",
+        "tls": "",
+        "x": 1155.5195541381836,
+        "y": 843.0038986206055,
+        "wires": [
+            [
+                "f4284454.1da548"
+            ]
+        ]
+    },
+    {
+        "id": "f4284454.1da548",
+        "type": "debug",
+        "z": "c16aeff1.23cc7",
+        "name": "reply_battery",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1368.3828353881836,
+        "y": 842.6445560455322,
+        "wires": []
+    },
+    {
+        "id": "84fabe6.7971e4",
+        "type": "function",
+        "z": "c16aeff1.23cc7",
+        "name": "FreqErr",
+        "func": "msg.url =\"http://192.168.1.15:8086/write?db=sparsnas\";\nmsg.payload = \"sparsnas\" + \",measurement=FreqErr \" + \" value=\" + msg.payload.FreqErr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 901.0195732116699,
+        "y": 1026.0039253234863,
+        "wires": [
+            [
+                "59f64785.9078d8",
+                "b3965345.3d25b"
+            ]
+        ]
+    },
+    {
+        "id": "59f64785.9078d8",
+        "type": "debug",
+        "z": "c16aeff1.23cc7",
+        "name": "Final_FreqErr",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1143.8946418762207,
+        "y": 1071.6446704864502,
+        "wires": []
+    },
+    {
+        "id": "b3965345.3d25b",
+        "type": "http request",
+        "z": "c16aeff1.23cc7",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "",
+        "tls": "",
+        "x": 1148.5195541381836,
+        "y": 990.0038986206055,
+        "wires": [
+            [
+                "5e0c0df7.d53594"
+            ]
+        ]
+    },
+    {
+        "id": "5e0c0df7.d53594",
+        "type": "debug",
+        "z": "c16aeff1.23cc7",
+        "name": "reply_FreqErr",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1371.3828353881836,
+        "y": 989.6445560455322,
+        "wires": []
+    },
+    {
+        "id": "b4900578.721178",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    }
+]
