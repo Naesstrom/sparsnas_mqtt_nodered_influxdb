@@ -1,7 +1,7 @@
 # sparsnas_mqtt_nodered_influxdb
 A node-red flow to transfer from Sparsnas mqtt script to influxdb
 
-This uses the mqtt script from  @tubalainen found [here](https://github.com/tubalainen/sparsnas_decoder) and splits up the json string to each value and puts it in a influxdb database.
+This uses the mqtt script from @tubalainen found [here](https://github.com/tubalainen/sparsnas_decoder) and splits up the json string to each value and puts it in a influxdb database.
 
 ## Things you need
 - Lots of things, look at the link above to get the mqtt interface working.
