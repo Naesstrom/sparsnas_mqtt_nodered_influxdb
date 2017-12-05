@@ -12,8 +12,9 @@ This uses the mqtt script from  @tubalainen found [here](https://github.com/tuba
 1. Create a new Database in your influxdb install named sparsnas _(or name it something else but remember it for later or just skip it, I like to keep them separated)_
 2. Import the node-red flow and it should look something like this:
 ![node red flow](https://i.imgur.com/DEUuXMx.png)
-3. In each of the functions replace the IP adress in _"http://192.168.1.15:8086/write?db=sparsnas"_ with the correct adress to your influxdb adress _(This is also where you need to change the db name if you didn't follow my suggestion in 1.)_
-4. That's it. Now it should start to populate your database with the values from your Sparsnäs energy meter.
+3. In the **mqtt in node** replace the server IP with your MQTT server and use the correct **Topic** if you changed it.
+4. In each of the functions replace the IP adress in _"http://192.168.1.15:8086/write?db=sparsnas"_ with the correct adress to your influxdb adress _(This is also where you need to change the db name if you didn't follow my suggestion in 1.)_
+5. That's it. Now it should start to populate your database with the values from your Sparsnäs energy meter.
 
 ## Bonus
 
